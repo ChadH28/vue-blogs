@@ -1,0 +1,34 @@
+{
+    "posts": [
+        {
+            "title": "Top 5 Css tips",
+            "body": "Lorem Pipsum",
+            "id": 2,
+            "tags": [
+                "webdev",
+                "css",
+                "coding"
+            ]
+        },
+        {
+            "title": "How to keep your code clean",
+            "body": "Lorem Pipsum",
+            "id": 2,
+            "tags": [
+                "webdev",
+                "css",
+                "coding"
+            ]
+        },
+        {
+            "title": "Bootstrap101",
+            "body": "Lorem Pipsum",
+            "id": 2,
+            "tags": [
+                "webdev",
+                "css",
+                "coding"
+            ]
+        }
+    ]
+}
