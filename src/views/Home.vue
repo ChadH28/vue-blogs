@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <h1>Blogger</h1>
-    <PostList :posts="posts"></PostList>
+    <div v-if="error">{{error}}</div>
+    <div v-if="posts.length">
+      <PostList :posts="posts"></PostList>
+    </div>
+    <div v-else>Loading....</div>
+    
 
     <!--<h2>Refs</h2>
     <br />
@@ -49,9 +54,21 @@ export default {
     // });
 
     const posts = ref([]);
-    const error = ref(null)
+    const error = ref(null);
 
-    return { posts };
+    const load = async () => {
+      try {
+        let data = await fetch('http://localhost:3000/posts')
+        if (!data.ok) {
+          throw Error('no data available')
+        }
+        posts.value = await data.json()
+      } catch (error) {
+        error.value = error.message
+        console.log(error.value)
+      }
+    }
+    load()
 
     // const search = ref("");
     // const users = ref([
