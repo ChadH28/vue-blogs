@@ -1,12 +1,11 @@
 <template>
   <div class="home">
     <h1>Blogger</h1>
-    <div v-if="error">{{error}}</div>
+    <div v-if="error">{{ error }}</div>
     <div v-if="posts.length">
       <PostList :posts="posts"></PostList>
     </div>
     <div v-else>Loading....</div>
-    
 
     <!--<h2>Refs</h2>
     <br />
@@ -30,14 +29,9 @@
 </template>
 <script>
 // @ is an alias to /src
-import {
-  ref,
-  reactive,
-  computed,
-  watch,
-  watchEffect,
-} from "vue";
+import { ref, reactive, computed, watch, watchEffect } from "vue";
 import PostList from "../components/posts/PostList";
+import getPosts from "../composables/getPosts";
 
 export default {
   name: "Home",
@@ -53,22 +47,9 @@ export default {
     //   age: 34,
     // });
 
-    const posts = ref([]);
-    const error = ref(null);
+    const { posts, error, load } = getPosts();
 
-    const load = async () => {
-      try {
-        let data = await fetch('http://localhost:3000/posts')
-        if (!data.ok) {
-          throw Error('no data available')
-        }
-        posts.value = await data.json()
-      } catch (error) {
-        error.value = error.message
-        console.log(error.value)
-      }
-    }
-    load()
+    load();
 
     // const search = ref("");
     // const users = ref([
@@ -134,6 +115,8 @@ export default {
       // matchingUsers,
       // handleClick,
       posts,
+      error,
+      load,
     };
   },
   // created() {
